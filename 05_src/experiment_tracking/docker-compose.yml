@@ -1,6 +1,6 @@
 version: "3.8"
 
-services:  
+services:
   # PostgreSQL database
   postgres:
     container_name: postgres
@@ -14,7 +14,8 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       POSTGRES_DB: "${POSTGRES_DB}"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+#      - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
@@ -89,4 +90,3 @@ services:
     depends_on:
       - postgres
       - minio-setup
-  
